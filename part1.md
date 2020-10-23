@@ -1,8 +1,8 @@
-StaySafe: primeira parte
-======================
+StaySafe: Parte 1
+=================
 
 O objetivo do projeto de Sistemas Distribuídos (SD) é desenvolver o sistema **StaySafe**, que permite o cálculo da probabilidade de uma pessoa estar infetada com dado vírus.
-_(NB: Qualquer semelhança com a realidade é pura coincidência.)_
+_(NB: Qualquer semelhança com a realidade atual é pura coincidência.)_
 O sistema será concretizado através de um conjunto de serviços gRPC implementados na plataforma Java.
 
 O projeto está estruturado em duas partes.
@@ -17,13 +17,13 @@ Dada a utilização generalizada de equipamentos móveis com funções sensoriai
 Esta "vigilância", embora tenha uma justificação sanitária relevante, coloca questões éticas que é fundamental considerar num Estado livre e democrático.
 Nesse sentido, é importante que os cidadãos tenham acesso à melhor informação disponível, nomeadamente através do tratamento e estudo dos dados pela comunidade académica e sua divulgação pelos meios de comunicação. 
 
-Neste contexto, o objetivo do **StatySafe** é permitir a académicos e jornalistas devidamente credenciados o acesso, a cada momento, ao valor das _probabilidade de infeção_, quer ao nível individual (de cada pessoa registada no sistema), quer de forma agregada.
+Neste contexto, o objetivo do **StaySafe** é permitir a académicos e jornalistas devidamente credenciados o acesso, a cada momento, ao valor das _probabilidade de infeção_, quer a nível individual (de cada pessoa registada no sistema), quer de forma agregada.
 
 2 Arquitetura do sistema
 ------------------------
 
 O sistema **StaySafe** assume que os indivíduos que querem participar instalam uma aplicação no seu smartphone/smartwatch que comunica com um sistema de recolha de informação existente em diversos espaços (comerciais, empresariais): o *sniffer*.
-O sistema inclui também o *dgs* _(data get server)_ que armazena observações e que responde a interrogações feitas por dois tipos de clientes: *jornalists* e *researchers*.
+O sistema inclui também o *dgs* _(data get server)_ que armazena observações e que responde a interrogações feitas por dois tipos de clientes: *journalists* e *researchers*.
 
 A figura seguinte mostra uma visão global dos componentes da solução.
 
@@ -35,56 +35,55 @@ A seguir especificam-se detalhes sobre cada componente.
 2.1 Servidor *dgs*
 -------------------
 
-O servidor *dgs* regista os *sniffers*, recebe e armazena observações e depois responde a pesquisas.
+O servidor *dgs* regista os *sniffers*, recebe e armazena as suas observações e responde a pesquisas dos *researchers* e *journalists*.
 
 As operações a disponibilizar por um servidor *dgs* são as seguintes:
 
 -   `sniffer_join` -- regista um *sniffer*.  
 Recebe o nome de um novo sniffer e o seu endereço (morada).  
-O nome indicado tem que ser único, i.e. não pode ser duplicado de um já existente.
+O nome indicado tem que ser único, i.e. não pode ser duplicado de um já existente.  
 É possível registar várias vezes um sniffer com o mesmo nome e mesmo endereço;
 
 -   `sniffer_info` -- recebe o nome de um sniffer e devolve o seu endereço;
 
--   `report` -- recebe observações.
-Recebe o nome do sniffer, um conjunto de observações, e os dados correspondentes.  
+-   `report` -- recebe observações enviadas por um *sniffer*.  
+Recebe o nome do sniffer, um conjunto de observações e os dados correspondentes.  
 O nome deve corresponder a um sniffer registado previamente.  
-O servidor regista as observações com a sua data e hora, no momento da receção.
+O servidor regista as observações com a data e hora do servidor no momento da receção;
 
--   `individual_infection_probability` -- permite calcular a probabilidade de um dado cidadão, identificado pelo número de cartão de cidadão e ainda não declarado infetado, estar efetivamente infetado.  
-Recebe o identificador do sujeito.
-Devolve a probabilidade de o sujeito estar infetado.
-Este cálculo é feito com base na equação seguinte:
+-   `individual_infection_probability` -- permite calcular a probabilidade de um dado cidadão ainda não declarado infetado, estar efetivamente infetado.  
+Recebe o identificador do cidadão.  
+Devolve a probabilidade de o cidadão estar infetado.  
+Este cálculo é feito com base na equação:
 
 ![Equation 1](img/equation1.png)
 
-onde x é o tempo máximo (em minutos) que um cidadão A esteve em contacto com outro cidadão infetado B.
-Por exemplo, se o cidadão com identificação A esteve no local "loja-azul-colombo" (ou seja, a sua app registou informação no sniffer com este nome), à mesma hora que o cidadão infetado B, durante 10 minutos, e esteve também no local "loja-cidadao-laranjeiras", à mesma hora que o cidadão C, durante 12.3 minutos, então o valor de x é igual a 12.3.
+onde x é o tempo máximo (em minutos) que um cidadão A esteve em contacto com outro cidadão infetado B.  
+Por exemplo, se o cidadão com identificação A esteve no local "loja-azul-colombo" (ou seja, a sua app registou informação no *sniffer* com este nome), à mesma hora que o cidadão infetado B, durante 10 minutos, e esteve também no local "loja-cidadao-laranjeiras", à mesma hora que o cidadão C, durante 12.3 minutos, então o valor de x é igual a 12.3.  
 Esta operação só está acessível para *researchers*;
 
--   `aggregate_infection_probability` -- permite calcular estatísticas acerca da probabilidade de um cidadão ainda não declarado infetado, estar efetivamente infetado.  
-Recebe um argumento que especifica quais as estatísticas de interesse: *mean_dev* para obter a média e o desvio padrão da probabilidade de um cidadão estar infetado, ou *percentiles* para obter a mediana (percentil-50), o Q1 (percentil-25) e o Q3 (percentil-75).
+-   `aggregate_infection_probability` -- permite calcular estatísticas acerca da probabilidade de qualquer cidadão ainda não declarado infetado, estar efetivamente infetado.  
+Recebe um argumento que especifica quais as estatísticas de interesse: *mean_dev* para obter a média e o desvio padrão da probabilidade de qualquer cidadão estar infetado, ou *percentiles* para obter a mediana (percentil-50), o Q1 (percentil-25) e o Q3 (percentil-75).  
 Para informação sobre como calcular estes valores aconselha-se por exemplo a visita a este site: https://www.indeed.com/career-advice/career-development/how-to-calculate-percentile.
+Para estes cálculos consideram-se as probabilidades individuais de todos os indivíduos ainda não declarados infetados.  
+Esta operação está acessível para *researchers* e *journalists*.
 
-Para estes cálculos consideram-se as probabilidades individuais de todos os indivíduos ainda não declarados infetados.
-Esta operação está acessível para *researchers* e *journalists*;
-
-Os resultados das operações de pesquisa devem ser devolvidas em mensagens estruturadas, com campos individuais para cada atributo.  
+Os resultados das operações de pesquisa devem ser devolvidos em mensagens estruturadas, com campos individuais para cada atributo.  
 Os campos devem ser descritos com o tipo de dados mais adequado ao seu conteúdo, de modo a permitir o melhor mapeamento possível para os tipos da linguagem de programação.
 
 ### Argumentos
 
-O nome de um sniffer deve ser alfanumérico com comprimento mínimo de 5 e máximo de 30 caracteres.  
+O nome de um *sniffer* deve ser alfanumérico com comprimento mínimo de 5 e máximo de 30 caracteres.  
 
-A morada deve conter o nome da rua, número da porta, número do andar ou da loja (etc.), código postal e cidade.
+A morada deve conter o nome da rua, número da porta, número do andar ou da loja, código postal e cidade.
 
-Uma observação tem a data e hora de inserção no *dgs*, o nome do sniffer, um tipo (`infetado` e `nao-infetado`), um identificador do cidadão, as datas e horas de entrada e saída no local abrangido pelo sniffer.
+Uma observação deve ter a data e hora de inserção no *dgs*, o nome do *sniffer* que enviou a observação, um tipo (`infetado` ou `nao-infetado`), um identificador do cidadão, as datas e horas de entrada e saída no local abrangido pelo sniffer.
 Todas as datas e horas devem ter precisão de segundos.
 
 O identificador de uma pessoa é um número inteiro positivo com pelo menos 63 bits.
-Trata-se de um pseudo-identificador, ou seja, um número único que não tem relação com o cartão de cidadão ou número de contribuinte ou outro que permita saber quem é a pessoa.
+Trata-se de um pseudo-identificador, ou seja, um número único que não tem relação com o cartão de cidadão, número de contribuinte ou outro que permita saber quem é a pessoa.
 
-Os valores das probabilidades devem ser reportados com 3 casas decimais.
+Os valores das probabilidades a retornar devem ser reportados com 3 casas decimais.
 
 ### Operações de controlo
 
@@ -120,7 +119,7 @@ Os IT verificam o cumprimento do contrato de um serviço através de invocaçõe
 ---------------------
 
 Um *sniffer* recebe notificações das apps registadas no StaySafe, faz o seu processamento e depois envia um conjunto de observações acumuladas para o servidor de armazenamento *dgs*. 
-Cada sniffer tem associado um nome e um endereço.  
+Cada *sniffer* tem associado um nome e uma morada.  
 Por exemplo, um sniffer na receção do INESC-ID pode ter como nome "rececao-inesc-id" e morada "Rua Alves Redol, 9, Piso 0, 1000-029 Lisboa".
 
 O *sniffer* tem uma interface-utilizador de linha de comando. 
@@ -130,7 +129,7 @@ Ao receber uma linha vazia, ou ao detetar o fecho do *standard input*, o cliente
 
 ### Argumentos
 
-O *sniffer* deverá receber como argumentos na linha de comando, o servidor e o porto do *dgs*, o seu nome e morada.
+O *sniffer* deverá receber, como argumentos na linha de comando, o servidor e o porto do *dgs*, o seu nome, e a sua morada.
 
 Por exemplo, o *sniffer* pode ser lançado da seguinte forma ($ representa a _shell_ do sistema operativo):
 
@@ -187,7 +186,7 @@ linhas começadas por `sleep` seguido de um número inteiro devem causar uma pau
     nao-infetado,777777777,2020-10-23 09:33:33, 2020-10-23 11:18:24
 
 No exemplo acima, a primeira linha é ignorada e contém um comentário.  
-Ao chegar à linha em branco, são enviadas as duas observações, de uma pessoa e de um carro.  
+Ao chegar à linha em branco, são enviadas as duas observações, de um infetado e de um não-infetado.  
 A linha seguinte faz com que exista uma pausa de 1 segundo no envio.  
 A linha em branco a seguir não envia nada, porque não havia observações acumuladas.  
 A linha a seguir é ignorada e contém também um comentário.  
@@ -199,7 +198,7 @@ O *input* fecha a seguir e é feito o envio da observação.
 ------------------------
 
 O *journalist* é uma interface-utilizador de linha de comando que permite lançar interrogações a um *dgs*.  
-As interrogações estão relacionadas com a obtenção de estatísticas acerca das probabilidades de uma pessoa ainda não declarada infetada estar efetivamente infetada.
+As interrogações estão relacionadas com a obtenção de estatísticas acerca das probabilidades de qualquer pessoa ainda não declarada infetada estar efetivamente infetada.
 
 ### Argumentos
 
@@ -211,11 +210,11 @@ Por exemplo, o *journalist* pode ser lançado da seguinte forma:
 
 ### Pesquisa
 
-Os comandos de pesquisa que permitem procurar objetos observados chamam-se *mean_dev* e *percentiles*. 
+Os comandos de pesquisa que permitem obter estatísticas chamam-se *mean_dev* e *percentiles*. 
 
 ### Comando *mean_dev*
 
-O comando `mean_dev` retorna a média e o desvio padrão das probabilidades de uma pessoa ainda não declarada infetada estar efetivamente infetada.
+O comando `mean_dev` retorna a média e o desvio padrão das probabilidades de qualquer pessoa ainda não declarada infetada estar efetivamente infetada.
 O resultado deve ser uma linha com o formato:
 
     media,desvio_padrao
@@ -227,7 +226,7 @@ O resultado deve ser uma linha com o formato:
 
 ### Comando *percentiles*
 
-O comando `percentiles` retorna a mediana (percentil-50), o Q1 (percentil-25) e o Q3 (percentil-75) das probabilidades de uma pessoa ainda não declarada infetada estar efetivamente infetada.
+O comando `percentiles` retorna a mediana (percentil-50), o Q1 (percentil-25) e o Q3 (percentil-75) das probabilidades de qualquer pessoa ainda não declarada infetada estar efetivamente infetada.
 O resultado deve ser uma linha com o formato:
 
     mediana,Q1,Q3
@@ -252,15 +251,15 @@ No entanto, o *researcher* tem acesso a mais informação.
 
 ### Argumentos
 
-O *journalist* deverá receber como argumentos, na linha de comando, o servidor e o porto do *dgs* a contactar. 
+O *researcher* deverá receber como argumentos, na linha de comando, o servidor e o porto do *dgs* a contactar. 
 
-Por exemplo, o *journalist* pode ser lançado da seguinte forma:
+Por exemplo, o *researcher* pode ser lançado da seguinte forma:
 
-    $ journalist localhost 8080
+    $ researcher localhost 8080
 
 ### Pesquisa
 
-Os comandos de pesquisa que permitem procurar objetos observados chamam-se *mean_dev*, *percentiles*, e *single_prob*. 
+Os comandos de pesquisa que permitem procurar estatísticas chamam-se *mean_dev*, *percentiles*, e *single_prob*. 
 Os comandos *mean_dev* e *percentiles* são exatamente iguais aos do cliente *journalist*.
 
 ### Comando *single_prob*
@@ -343,7 +342,7 @@ Se for um dos clientes, pode decidir parar com o erro recebido ou fazer novas te
 4 Resumo
 --------
 
-Em resumo, na primeira parte do trabalho, é necessário implementar:  
+Em resumo, na primeira parte do trabalho é necessário implementar:  
 o servidor, *dgs*;  
 o cliente com testes automáticos, *dgs-client*;  
 o cliente para carregamento de dados, *sniffer*; e  
@@ -456,7 +455,7 @@ Todas as discussões e revisões de nota do trabalho devem contar com a particip
 5.8 Atualizações
 ----------------
 
-Para acompanhar as novidades sobre o projeto, consultar regularmente a [página Web dos laboratórios](http://disciplinas.tecnico.ulisboa.pt/leic-sod/2019-2020/labs/).  
+Para acompanhar as novidades sobre o projeto, consultar regularmente a [página Web dos laboratórios](https://tecnico-distsys.github.io).  
 Caso venham a surgir correções ou clarificações neste documento, podem ser consultadas no histórico (_History_).
 
 

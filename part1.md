@@ -56,7 +56,7 @@ Recebe o identificador do sujeito.
 Devolve a probabilidade de o sujeito estar infetado.
 Este cálculo é feito com base na equação seguinte:
 
-XXXX
+![Equation 1](img/equation1.png)
 
 onde x é o tempo máximo (em minutos) que um cidadão A esteve em contacto com outro cidadão infetado B.
 Por exemplo, se o cidadão com identificação A esteve no local "loja-azul-colombo" (ou seja, a sua app registou informação no sniffer com este nome), à mesma hora que o cidadão infetado B, durante 10 minutos, e esteve também no local "loja-cidadao-laranjeiras", à mesma hora que o cidadão C, durante 12.3 minutos, então o valor de x é igual a 12.3.

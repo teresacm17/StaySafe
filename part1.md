@@ -27,7 +27,7 @@ O sistema inclui também o *dgs* _(data get server)_ que armazena observações 
 
 A figura seguinte mostra uma visão global dos componentes da solução.
 
-<p align="center">![System](img/system1.png)</p>
+![System](img/system1.png)
 
 Na primeira parte vai construir-se uma primeira versão de todos os componentes: *sniffer*, *dgs*, *journalist* e *researcher*. 
 A seguir especificam-se detalhes sobre cada componente.
@@ -56,7 +56,7 @@ Recebe o identificador do cidadão.
 Devolve a probabilidade de o cidadão estar infetado.  
 Este cálculo é feito com base na equação (*NB: sem qualquer base científica!*):
 
-<p align="center">![Equation 1](img/equation1.png)</p>
+![Equation 1](img/equation1.png)
 
 onde *x* é o tempo máximo (em minutos) que um cidadão A esteve em contacto com outro cidadão infetado B.  
 Por exemplo, se o cidadão com identificação A esteve no local "loja-azul-colombo" (ou seja, a sua app registou informação no *sniffer* com este nome), à mesma hora que o cidadão infetado B, durante 10 minutos, e esteve também no local "loja-cidadao-laranjeiras", à mesma hora que o cidadão C, durante 12.3 minutos, então o valor de x é igual a 12.3.  

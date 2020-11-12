@@ -133,7 +133,7 @@ O *sniffer* deverá receber, como argumentos na linha de comando, o servidor e o
 
 Por exemplo, o *sniffer* pode ser lançado da seguinte forma ($ representa a _shell_ do sistema operativo):
 
-    $ sniffer localhost 8080 rececao-inesc-id Rua Alves Redol, 9, Piso 0, 1000-029 Lisboa
+    $ sniffer localhost 8080 rececao-inesc-id Rua Alves Redol,9,Piso 0,1000-029,Lisboa
 
 O programa fica de seguida à espera de dados para enviar.
 
@@ -146,17 +146,17 @@ Dentro de uma linha de texto, os campos são separados por `,` (vírgula).
 
 Submeter a observação de uma pessoa infetada:
 
-    infetado,111111111,2020-10-23 09:12:16, 2020-10-23 09:18:24
+    infetado,111111111,2020-10-23 09:12:16,2020-10-23 09:18:24
 
 Submeter a observação de uma pessoa não infetada:
 
-    nao-infetado,222222222,2020-10-23 10:12:00, 2020-10-23 10:24:34
+    nao-infetado,222222222,2020-10-23 10:12:00,2020-10-23 10:24:34
 
 Submeter várias observações:
 
-    infetado,111111111,2020-10-23 09:12:16, 2020-10-23 09:18:24
-    nao-infetado,555555555,2020-10-23 10:12:16, 2020-10-23 10:29:24
-    nao-infetado,777777777,2020-10-23 09:33:33, 2020-10-23 11:18:24
+    infetado,111111111,2020-10-23 09:12:16,2020-10-23 09:18:24
+    nao-infetado,555555555,2020-10-23 10:12:16,2020-10-23 10:29:24
+    nao-infetado,777777777,2020-10-23 09:33:33,2020-10-23 11:18:24
 
 Em todos os exemplos acima, o envio só é feito após uma linha vazia ou caso o *standard input* seja fechado.
 
@@ -164,7 +164,7 @@ Em todos os exemplos acima, o envio só é feito após uma linha vazia ou caso o
 
 É possível enviar o conteúdo de um ficheiro para o programa, com o operador de redirecionamento:
 
-    $ sniffer localhost 8080 rececao-inesc-id Rua Alves Redol, 9, Piso 0, 1000-029 Lisboa < data.txt
+    $ sniffer localhost 8080 rececao-inesc-id Rua Alves Redol,9,Piso 0,1000-029,Lisboa < data.txt
 
 O conteúdo do ficheiro de texto é enviado para o programa.
 
@@ -177,13 +177,13 @@ linhas começadas por `sleep` seguido de um número inteiro devem causar uma pau
 **Exemplo:**
 
     # parte 1
-    infetado,111111111,2020-10-23 09:12:16, 2020-10-23 09:18:24
-    nao-infetado,555555555,2020-10-23 09:12:16, 2020-10-23 09:18:24
+    infetado,111111111,2020-10-23 09:12:16,2020-10-23 09:18:24
+    nao-infetado,555555555,2020-10-23 09:12:16,2020-10-23 09:18:24
 
     sleep,1000
 
     #parte 2
-    nao-infetado,777777777,2020-10-23 09:33:33, 2020-10-23 11:18:24
+    nao-infetado,777777777,2020-10-23 09:33:33,2020-10-23 11:18:24
 
 No exemplo acima, a primeira linha é ignorada e contém um comentário.  
 Ao chegar à linha em branco, são enviadas as duas observações, de um infetado e de um não-infetado.  
@@ -267,7 +267,7 @@ Os comandos *mean_dev* e *percentiles* são exatamente iguais aos do cliente *jo
 O comando `single_prob` retorna a probabilidade de uma (ou várias) pessoa(s) ainda não declarada(s) infetada(s) estar(em) efetivamente infetada(s).
 O resultado deve ser uma (ou mais) linha(s) com o formato:
 
-    identificador,probabilidade
+    probabilidade
 
 ### Argumentos
 

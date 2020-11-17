@@ -151,7 +151,7 @@ A segunda parte vale 10 valores em 20, distribuídos da seguinte forma:
 
 - Qualidade do código -- os mesmos aspetos da primeira parte -- em todos os componentes (1,5 valores)
 
-A data limite de entrega é: **sábado, 2 de maio de 2020, 17:00**.
+A data limite de entrega é: **sexta-feira, 4 de dezembro de 2020, 17:00**.
 
 
 4.3 Relatório

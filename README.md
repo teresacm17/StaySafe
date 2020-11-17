@@ -6,7 +6,7 @@ Enunciado do projeto StaySafe
 
 - [Parte 1](part1.md)
 
-<!-- - [Parte 2](part2.md) -->
+- [Parte 2](part2.md)
 
 ----
 

@@ -27,7 +27,7 @@ O sistema inclui também o *dgs* _(data get server)_ que armazena observações 
 
 A figura seguinte mostra uma visão global dos componentes da solução.
 
-![System](img/system1.png)
+![System](img/system2.png)
 
 Na primeira parte vai construir-se uma primeira versão de todos os componentes: *sniffer*, *dgs*, *journalist* e *researcher*. 
 A seguir especificam-se detalhes sobre cada componente.

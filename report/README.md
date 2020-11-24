@@ -1,12 +1,12 @@
-# Relatório do projeto Sauron
+# Relatório do projeto StaySafe
 
-Sistemas Distribuídos 2019-2020, segundo semestre
+Sistemas Distribuídos 2020-2021, primeiro semestre
 
 
 ## Autores
 
-*(preencher linha abaixo com identificador de grupo, por exemplo, A07 ou T22; e depois apagar esta linha)*  
-**Grupo CXX**
+*(preencher linha abaixo com identificador de grupo; e depois apagar esta linha)*  
+**Grupo GXX**
 
 
 *(preencher a tabela abaixo com dados da equipa; e depois apagar esta linha)*  
@@ -15,17 +15,16 @@ Sistemas Distribuídos 2019-2020, segundo semestre
 | -------|-------------------|----------------------------------| ------------------------------------|
 | 11111  | Alice Distributed | <https://github.com/AliceUser>   | <mailto:alice@tecnico.ulisboa.pt>   |
 | 22222  | Bob Systems       | <https://github.com/BobUser>     | <mailto:bob@tecnico.ulisboa.pt>     |
-| 33333  | Charlie Rules     | <https://github.com/CharlieUser> | <mailto:charlie@tecnico.ulisboa.pt> |
 
 *(usar imagens com 150px de altura; e depois apagar esta linha)*  
-![Alice](alice.png) ![Bob](bob.png) ![Charlie](charlie.png)
+![Alice](alice.png) ![Bob](bob.png)
 
 
 ## Melhorias da primeira parte
 
 _(que correções ou melhorias foram feitas ao código da primeira parte -- incluir link para commits no GitHub onde a alteração foi feita)_
 
-- [descrição da alteração](https://github.com/tecnico-distsys/CXX-Sauron/commit/156e1ac25798e2360b362b3a8fc474f7cfe64d01)
+- [descrição da alteração](https://github.com/tecnico-distsys/GXX-StaySafe/commit/156e1ac25798e2360b362b3a8fc474f7cfe64d01)
 
 
 ## Modelo de faltas

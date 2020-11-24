@@ -188,7 +188,7 @@ Pode também ser um diagrama de sequência da parte mais importante do protocolo
 ----------------
 
 As instruções de instalação e configuração de todo o sistema, elaboradas na primeira parte, devem ser atualizadas no documento `demo/README.md`.  
-Como referência, pode ser consultado um [guião de demonstração de exemplo](demo/README.md). 
+Como referência, pode ser consultado um [guião de demonstração de exemplo](TBD/README.md). 
 
 Para a segunda parte deve ser criada uma **nova secção** no guião, dedicada à **replicação e tolerância a faltas**.
 Nesta nova secção, devem ser indicados os comandos para: lançar réplicas, fornecer dados, fazer interrogações, etc.
@@ -229,7 +229,7 @@ Todas as discussões e revisões de nota do trabalho devem contar com a presenç
 4.6 Atualizações
 ----------------
 
-Para acompanhar as novidades sobre o projeto, consultar regularmente a [página Web dos laboratórios](http://disciplinas.tecnico.ulisboa.pt/leic-sod/2020-2021/labs/).  
+Para acompanhar as novidades sobre o projeto, consultar regularmente a [página Web dos laboratórios](https://tecnico-distsys.github.io).  
 Caso venham a surgir correções ou clarificações neste documento, podem ser consultadas no histórico (_History_).
 
 

@@ -11,12 +11,12 @@ Sistemas Distribuídos 2020-2021, primeiro semestre
 
 *(preencher a tabela abaixo com dados da equipa; e depois apagar esta linha)*  
 
-| Número | Nome              | Utilizador                       | Correio eletrónico                  |
-| -------|-------------------|----------------------------------| ------------------------------------|
-| 11111  | Alice Distributed | <https://github.com/AliceUser>   | <mailto:alice@tecnico.ulisboa.pt>   |
-| 22222  | Bob Systems       | <https://github.com/BobUser>     | <mailto:bob@tecnico.ulisboa.pt>     |
+| Número | Nome              | Utilizador                       | Correio eletrónico                               |
+| -------|-------------------|----------------------------------| -------------------------------------------------|
+| 93584  | João Lopes        | <https://github.com/varcheiro99> | <mailto:joao.costa.lopes@tecnico.ulisboa.pt>     |     
+| 93617  | Teresa Matos      | <https://github.com/teresacm17>  | <mailto:teresa.colaco.matos@tecnico.ulisboa.pt>  |
 
-*(usar imagens com 150px de altura; e depois apagar esta linha)*  
+POR AQUI FOTOS
 ![Alice](alice.png) ![Bob](bob.png)
 
 
@@ -28,6 +28,7 @@ _(que correções ou melhorias foram feitas ao código da primeira parte -- incl
 
 
 ## Modelo de faltas
+FALTAS SILENCIOSAS
 
 _(que faltas são toleradas, que faltas não são toleradas)_
 
@@ -47,6 +48,9 @@ _(descrição das trocas de mensagens)_
 
 
 ## Opções de implementação
+-> protocolo de replicação: GOSSIP 
+-> 3 réplicas de servidores: 2f+1 replicas para resolver cada falta (assim temos solução para 1 falta => 2*1+1 = 3 replicas
+-> 
 
 _(Descrição de opções de implementação, incluindo otimizações e melhorias introduzidas)_
 
